@@ -101,6 +101,7 @@ class RBACplugin
         if(isset($avilable['role'])){
         switch ($avilable['role']) {
             case 'logged':
+                if(is_user_logged_in()){
                 if($avilable['todo']=='redirect'){
                     if($avilable['redirect']){
                         wp_redirect (get_permalink ($avilable['redirect']));
@@ -112,8 +113,10 @@ class RBACplugin
                 elseif($avilable['todo']=='die'){
                     wp_die(__('You are legged-in user and you cannot come here.', self::DOMAIN));
                 }
+                }
                 break;
             case 'not_logged':
+                if(!is_user_logged_in()){
                 if($avilable['todo']=='redirect'){
                     if($avilable['redirect']){
                         wp_redirect (get_permalink ($avilable['redirect']));
@@ -127,6 +130,7 @@ class RBACplugin
                 }
                 elseif ($avilable['todo']=='login') {
                     wp_redirect (wp_login_url( get_permalink() ));
+                }
                 }
                 break;
             default:
