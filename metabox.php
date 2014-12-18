@@ -5,10 +5,13 @@
 /* @var $selected_posts array */
 
 ?>
-<p>
+<table class="widefat">
+    <tr>
+<th colspan="3">
     <?php _e('Select who <b>cannot</b> read this post', self::DOMAIN); ?>
-</p>
-<div class="RBAC"><?php //var_dump($selected_posts);die; ?><!--
+</th></tr>
+<!--
+<div class="RBAC"><?php //var_dump($selected_posts);die; ?>
 <?php
 
 foreach ($roles as $role => $caps){
@@ -24,27 +27,39 @@ foreach ($roles as $role => $caps){
 <select name="RBACroles[roles][redirect]" id="RBAC_roles_redirect">
                     <?php $this->renderOptions($this->logged_options,$selected_posts['roles']['redirect']); ?>
     </select>
--->
+
 </div>
-<div class='RBAC not-logged'>
-    <label rel='not_logged'>
-    <input type='checkbox' name='RBACroles[role]' id='not_logged' value='not_logged'<?php echo $checked ?>/>Not logged-in user<label>
-<select name="RBACroles[todo]" id="RBAC_not_logged_todo">
+-->
+    <tr class='RBAC not-logged'>
+
+
+  <td>  <label rel='not_logged'>
+    <input type='checkbox' name='RBACroles[role]' id='not_logged' value='not_logged'<?php echo $checked ?>/>Not logged-in user<label></td>
+<td>
+    <select name="RBACroles[todo]" id="RBAC_not_logged_todo">
                     <?php $this->renderOptions($this->non_logged_options,$selected_posts['todo']); ?>
+    </td>
+    <td>
     </select>
 <select name="RBACroles[redirect]" id="RBAC_not_logged_redirect">
                     <?php $this->renderOptions($this->get_pages(),$selected_posts['todo']); ?>
-    </select>
-</div>
-<div class='RBAC logged'>
+    </select></td>
+
+</tr>
+<tr class='RBAC logged'>
+
 <?php
-    echo "<label rel='logged'>";
-    echo "<input type='checkbox' name='RBACroles[role]' id='logged' value='logged'$checked/> Logged-in user<label>\n"; ?>
-<select name="RBACroles[todo]" id="RBAC_logged_todo">
+    echo "<td><label rel='logged'>";
+    echo "<input type='checkbox' name='RBACroles[role]' id='logged' value='logged'$checked/> Logged-in user<label></td>\n"; ?>
+<td>
+    <select name="RBACroles[todo]" id="RBAC_logged_todo">
                     <?php $this->renderOptions($this->logged_options,$selected_posts['todo']); ?>
-    </select>
+    </select></td>
+    <td>
 <select name="RBACroles[redirect]" id="RBAC_logged_redirect">
                     <?php $this->renderOptions($this->get_pages(),$this->$selected_posts['todo']); ?>
-    </select>
-</div>
+    </select></td>
+
+</tr>
+</table>
 <div class="clear"></div>
